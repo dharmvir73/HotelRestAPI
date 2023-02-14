@@ -11,10 +11,6 @@ import cors from "cors"
 const app = express();
 dotenv.config();
 
-app.use(cors({
-    origin: "*",
-    credentials: true,
-}))
 
 
 
@@ -37,6 +33,11 @@ mongoose.connection.on('connected',() => {
 
 
 //middlewares
+
+app.use(cors({
+    origin: "*",
+    credentials: true,
+}))
 
 app.use(cookieParser())
 
