@@ -12,8 +12,6 @@ const app = express();
 dotenv.config();
 
 
-
-
 const connect = async () => {
 try {
     await mongoose.connect(process.env.MONGO);
@@ -49,6 +47,7 @@ app.use("/api/hotels", hotelsRoute)
 app.use("/api/rooms", roomsRoute)
 
 app.use((err, req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const errorStatus = err.status || 500
     const errorMessage = err.message || "Something Went Wrong"
     return res.status(errorStatus).json({
