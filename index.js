@@ -46,8 +46,10 @@ app.use("/api/users", usersRoute)
 app.use("/api/hotels", hotelsRoute)
 app.use("/api/rooms", roomsRoute)
 
-app.use((err, req, res, next) => {
+app.use((err, req, res, next) => { 
     res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     const errorStatus = err.status || 500
     const errorMessage = err.message || "Something Went Wrong"
     return res.status(errorStatus).json({

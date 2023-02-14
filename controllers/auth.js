@@ -7,7 +7,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const register = async (req, res, next) =>{
-    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     try{
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
@@ -25,7 +27,9 @@ export const register = async (req, res, next) =>{
 }
 
 export const login = async (req, res, next) =>{
-    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     try{
         const user = await User.findOne({username: req.body.username})
         if(!user){

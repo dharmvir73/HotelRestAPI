@@ -3,8 +3,10 @@ import Rooms from "../models/Rooms.js"
 
 
 export const createHotel = async(req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     const newHotel = new Hotel(req.body)
-
 try{
     const savedHotel = await newHotel.save()
     res.status(200).json(savedHotel)
@@ -14,6 +16,9 @@ try{
 }
 
 export const updateHotel = async(req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
         try{
             const updatedHotel = await Hotel.findByIdAndUpdate(req.params.id, { $set: req.body}, {new: true})
             res.status(200).json(updatedHotel)
@@ -23,6 +28,9 @@ export const updateHotel = async(req, res, next) => {
 }
 
 export const deleteHotel = async(req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     try{
         await Hotel.findByIdAndDelete(req.params.id)
          res.status(200).json("Hotel Deleted Succesfully")
@@ -32,6 +40,9 @@ export const deleteHotel = async(req, res, next) => {
 }
 
 export const getHotel = async(req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     try{
         const getHotel = await Hotel.findById(req.params.id)
         res.status(200).json(getHotel)
@@ -41,6 +52,9 @@ export const getHotel = async(req, res, next) => {
 }
 
 export const getAllHotel = async(req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
     try{
         const getAllHotel = await Hotel.find(req.query)
@@ -53,7 +67,9 @@ export const getAllHotel = async(req, res, next) => {
 
 
 export const countByCity = async(req, res, next) => {
-    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     const cities = req.query.cities.split(",")
 
     try{
@@ -67,6 +83,9 @@ export const countByCity = async(req, res, next) => {
 }
 
 export const countByType = async(req, res, next) => { 
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     try{
         const hotelCount = await Hotel.countDocuments({type: "hotel"})
         const apartmentCount = await Hotel.countDocuments({type: "apartment"})
@@ -88,6 +107,9 @@ export const countByType = async(req, res, next) => {
 
 
 export const getHotelRooms = async (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     try{
         const hotel = await Hotel.findById(req.params.id)
         const list = await Promise.all(hotel.rooms.map(room=>{
