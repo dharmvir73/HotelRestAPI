@@ -12,6 +12,8 @@ const app = express();
 dotenv.config();
 
 
+app.use(express.static("build"))
+
 const connect = async () => {
 try {
     await mongoose.connect(process.env.MONGO);
@@ -28,9 +30,10 @@ mongoose.connection.on('diconnected',() => {
 mongoose.connection.on('connected',() => {
     console.log('mongoDB connected!');
 })
-
+    
 
 //middlewares
+
 
 app.use(cors({
     origin: "*",
